@@ -1,26 +1,65 @@
  import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { dummyAddress, dummyProducts } from "../assets/assets";
+import toast from "react-hot-toast";
 // 1. Create Context
 const AppContext = createContext();
 
 // 2. Create Provider (wraps your whole app)
 export const AppContextProvider = ({ children }) => {
+const currency= import.meta.VITE_CURRENCY
+
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [seller, setIsSeller] = useState(false);
     const [showUserLogin, setshowUserLogin] = useState(false);
-  const [cart, setCart] = useState([]);
+        const [products, setProducts] = useState([]);
+  const [cartItem, setCartItem] = useState({});
   const [favorites, setFavorites] = useState([]);
 
+  const fetchProducts = async () => {
+    setProducts(dummyProducts)
+
+  }
+  useEffect(() => {
+    fetchProducts();
+ 
+  }, [ ])
+  
   // Add item to cart
   const addToCart = (item) => {
-    setCart((prev) => [...prev, item]);
+    const cartData= structuredClone(cartItem)
+    if(cartData[item.id]){
+        cartData[item.id].quantity +=1
+    }
+    else{
+        cartData[item.id] =  1
+    }
+    setCartItem(cartData)
+    toast.success("Item added to cart")
   };
-
+  // update item from cart
+ const updateCart = (itemId,quantity) => {
+    const cartData= structuredClone(cartItem)
+  cartData[itemId]= quantity
+    setCartItem(cartData)
+     toast.success("cart updated successfully")
+ }
   // Remove item from cart
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+       const cartData= structuredClone(cartItem)
+    if(cartData[item.id]){
+        cartData[item.id].quantity -=1
+        if(cartData[item.id].quantity ===0){
+            delete cartData[item.id]
+    }
+    toast.success("Item removed from cart")
+    setCartItem(cartData)
+  }
+
+     
+    setCartItem(cartData)
+    toast.success("Item added to cart")
   };
 
   // Add/Remove favorites
@@ -47,6 +86,11 @@ export const AppContextProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         toggleFavorite,
+        products,
+        currency,
+        updateCart,
+        cartItem,
+    
       }}
     >
       {children}

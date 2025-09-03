@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import NavBar from './components/NavBar'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
  
+ 
 function App() {
-  const [count, setCount] = useState(0)
-
+ 
+const isSeller = useLocation().pathname.includes('seller')
   return (
     <>
-        <NavBar/> 
-        <div>
+    {isSeller ? null :   <NavBar/> }
+  
+        <div className={`${isSeller? "" : "px-6  md:px-16 lg:px-24"}  `}>
             <Routes>
                 <Route path='/' element={<Home/>}/>
             </Routes>
