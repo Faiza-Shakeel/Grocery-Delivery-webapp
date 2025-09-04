@@ -1,14 +1,22 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 import ProductCard from './ProductCard'
+import { useAppContext } from '../context/AppContext'
 const BestSeller = () => {
+  const {products}= useAppContext()
   return (
     <div>
        <div className='mt-16'>
-        <p className='text-2xl md:text-3xl font-medium'>Categories</p>
+        <p className='text-2xl md:text-3xl font-medium'>Best Seller</p>
         </div>
-        <div>
-            <ProductCard/>
+       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-3 lg:grid-cols-5 mt-6 '>
+
+
+          {
+            products.filter(product=>product.inStock).slice(0,5).map((product,index)=>(
+              <ProductCard key={index} product={product}/>
+         )) }
+ 
         </div>
         
     </div>

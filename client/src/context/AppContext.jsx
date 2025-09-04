@@ -1,4 +1,4 @@
- import { createContext, useContext, useState } from "react";
+ import { createContext, useContext, useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyAddress, dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
@@ -29,11 +29,11 @@ const currency= import.meta.VITE_CURRENCY
   // Add item to cart
   const addToCart = (item) => {
     const cartData= structuredClone(cartItem)
-    if(cartData[item.id]){
-        cartData[item.id].quantity +=1
+    if(cartData[item]){
+        cartData[item ] +=1
     }
     else{
-        cartData[item.id] =  1
+        cartData[item] =  1
     }
     setCartItem(cartData)
     toast.success("Item added to cart")
@@ -46,20 +46,17 @@ const currency= import.meta.VITE_CURRENCY
      toast.success("cart updated successfully")
  }
   // Remove item from cart
-  const removeFromCart = (id) => {
+  const removeFromCart = ( item) => {
        const cartData= structuredClone(cartItem)
-    if(cartData[item.id]){
-        cartData[item.id].quantity -=1
-        if(cartData[item.id].quantity ===0){
-            delete cartData[item.id]
+    if(cartData[item]){
+        cartData[item]  -=1
+        if(cartData[item] ===0){
+            delete cartData[item ]
     }
-    toast.success("Item removed from cart")
+  
     setCartItem(cartData)
+      toast.success("Item removed from cart")
   }
-
-     
-    setCartItem(cartData)
-    toast.success("Item added to cart")
   };
 
   // Add/Remove favorites
@@ -81,7 +78,7 @@ const currency= import.meta.VITE_CURRENCY
         setIsSeller,
         showUserLogin,
         setshowUserLogin,
-        cart,
+        
         favorites,
         addToCart,
         removeFromCart,
