@@ -12,8 +12,9 @@ const currency= import.meta.VITE_CURRENCY
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [seller, setIsSeller] = useState(false);
-    const [showUserLogin, setshowUserLogin] = useState(false);
+    const [showUserLogin, setShowUserLogin] = useState(false);
         const [products, setProducts] = useState([]);
+         const [searchquery, setsearchquery] = useState([]);
   const [cartItem, setCartItem] = useState({});
   const [favorites, setFavorites] = useState([]);
 
@@ -77,7 +78,8 @@ const currency= import.meta.VITE_CURRENCY
         seller,
         setIsSeller,
         showUserLogin,
-        setshowUserLogin,
+        setShowUserLogin,
+        searchquery, setsearchquery,
         
         favorites,
         addToCart,
