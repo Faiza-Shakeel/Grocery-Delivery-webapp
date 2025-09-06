@@ -59,6 +59,28 @@ const currency= import.meta.VITE_CURRENCY
       toast.success("Item removed from cart")
   }
   };
+// count cart items
+const getCartCount = () => {
+  let totalcount = 0;
+  for(const item in cartItem){
+    totalcount += cartItem[item]
+  }
+  return totalcount
+}
+
+ 
+ // count total price of cart items
+const getCartTotalPrice = () => {
+  let totalPrice = 0;
+  for (const item in cartItem) {
+    const product = products.find((prod) => prod._id === item);
+    if (product) {
+      totalPrice += product.offerPrice * cartItem[item];
+    }
+  }
+  return Math.floor(totalPrice * 100) / 100; // keep 2 decimal places
+};
+
 
   // Add/Remove favorites
   const toggleFavorite = (item) => {
@@ -89,6 +111,8 @@ const currency= import.meta.VITE_CURRENCY
         currency,
         updateCart,
         cartItem,
+         getCartTotalPrice,
+         getCartCount
     
       }}
     >
