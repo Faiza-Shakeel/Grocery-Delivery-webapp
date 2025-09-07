@@ -31,7 +31,7 @@ const {currency , updateCart,
                     <p className="md:text-xl text-base font-medium text-indigo-500">
                        {currency} ${product.offerPrice}{" "} <span className="text-gray-500/60 md:text-sm text-xs line-through">{currency}${product.price}</span>
                     </p>
-                    <div onClick={()=>e.stopPropagation()} className="text-indigo-500">
+                    <div onClick={(e)=>e.stopPropagation()} className="text-indigo-500">
                         {!cartItem[product._id] ? (
                             <button className="flex items-center justify-center gap-1
                              bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] 

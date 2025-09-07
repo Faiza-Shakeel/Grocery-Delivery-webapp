@@ -7,7 +7,7 @@ const AppContext = createContext();
 
 // 2. Create Provider (wraps your whole app)
 export const AppContextProvider = ({ children }) => {
-const currency= import.meta.VITE_CURRENCY
+const currency= import.meta.env._idVITE_CURRENCY
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);

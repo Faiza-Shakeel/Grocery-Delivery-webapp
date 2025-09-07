@@ -9,6 +9,9 @@ import Login from './components/Login'
 import AllProducts from './pages/AllProducts'
  import ProductCategory from './components/ProductCategory'
 import ProductDetails from './pages/ProductDetails'
+import Cart from './pages/Cart'
+import AddAdress from './pages/AddAdress'
+import MyOrders from './pages/MyOrders'
 function App() {
  const {showUserLogin}=useAppContext()
 const isSeller = useLocation().pathname.includes('seller')
@@ -24,6 +27,8 @@ const isSeller = useLocation().pathname.includes('seller')
                 <Route path='/Products/:category' element={<ProductCategory/>}/>
                  <Route path='/Products/:category/:id' element={<ProductDetails/>}/>
                   <Route path='/cart' element={<Cart/>}/>
+                   <Route path='/AddAdress' element={<AddAdress/>}/>
+                    <Route path='/My-orders' element={<MyOrders/>}/>
             </Routes>
         </div>
         {!isSeller && <Footer className='mt-24'/>}
