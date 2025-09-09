@@ -4,14 +4,14 @@ import { dummyAddress, dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 // 1. Create Context
 const AppContext = createContext();
-
+ 
 // 2. Create Provider (wraps your whole app)
 export const AppContextProvider = ({ children }) => {
-const currency= import.meta.env._idVITE_CURRENCY
+const currency= import.meta.env.VITE_CURRENCY
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [seller, setIsSeller] = useState(false);
+  const [IsSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
         const [products, setProducts] = useState([]);
          const [searchquery, setsearchquery] = useState([]);
@@ -97,7 +97,7 @@ const getCartTotalPrice = () => {
         navigate,
         user,
         setUser,
-        seller,
+         IsSeller,
         setIsSeller,
         showUserLogin,
         setShowUserLogin,
