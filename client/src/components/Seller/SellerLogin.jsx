@@ -3,14 +3,30 @@ import React, {  useState } from 'react'
 import { useAppContext } from '../../context/AppContext'
 
 const SellerLogin = () => {
-  const {isSeller,setIsSeller,navigate}=useAppContext()
+  const {isSeller,setIsSeller,navigate,toast,axios}=useAppContext()
    const [email, setEmail] =  useState("");
       const [password, setPassword] =  useState("");
-      const onSubmitHandler=(e)=>{
-        e.preventDefault()
-         setIsSeller(true)
+      const onSubmitHandler=async(e)=>{
+        try {
+          e.preventDefault()
+          const response= await axios.post("/api/seller/login",{email,password})
+  
+          if(response.data.success){
+            toast.success(response.data.message)
+            setIsSeller(true)
+            navigate("/seller")
+          }
+          else{
+            toast.error(response.data.message)
+          }
+        } catch (error) {
+          toast.error("An error occurred while logging in.")
+          console.error("Login error:", error);
+        }
+        
+         
           
-         navigate("/seller")
+         
       } 
       
   

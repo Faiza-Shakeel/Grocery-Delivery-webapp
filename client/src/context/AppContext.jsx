@@ -2,6 +2,9 @@
 import { useNavigate } from "react-router-dom";
 import { dummyAddress, dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 // 1. Create Context
 const AppContext = createContext();
  
@@ -112,7 +115,8 @@ const getCartTotalPrice = () => {
         updateCart,
         cartItem,
          getCartTotalPrice,
-         getCartCount
+         getCartCount,
+         axios,toast
     
       }}
     >
